@@ -13,13 +13,8 @@ node {
 pipeline {
     agent any
 
-    tools {
-        maven 'Maven 3.8.8'
-        sonarQubeScanner 'SonarScanner'
-    }
-
     environment {
-        SONAR_TOKEN = credentials('sonar-token-id')
+        SONAR_TOKEN = credentials('SONARQUBE INTERGRATION WITH JENKINS')
     }
 
     stages {
