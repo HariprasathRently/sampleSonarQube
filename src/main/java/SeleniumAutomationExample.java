@@ -28,6 +28,7 @@ public class SeleniumAutomationExample {
             // Error 5: NullPointerException if the element is not found or is null
             String value = element.getText();  // This might throw NullPointerException if element is not found
 
+
             // Error 6: Unhandled exception (NoSuchElementException) - missing exception handling
             WebElement nonExistingElement = driver.findElement(By.id("non-existent-element"));
             nonExistingElement.click();  // This line will cause a failure, but no exception handling is provided.
