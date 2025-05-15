@@ -13,29 +13,28 @@ node {
 pipeline {
     agent any
 
-     tools {
-        maven 'Maven'        // Your configured Maven tool
-    }
     environment {
         SONAR_TOKEN = credentials('SONARQUBE INTERGRATION WITH JENKINS')
     }
 
     stages {
-        stage('Build') {
+        stage('Compile Java') {
             steps {
-                sh 'mvn clean compile'
+                sh 'mkdir -p out && javac -d out $(find src -name "*.java")'
             }
         }
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('MySonarQube') {
-                    sh """
-                        mvn sonar:sonar \
-                        -Dsonar.projectKey=my-project \
-                        -Dsonar.host.url=https://sonarqube.example.com \
-                        -Dsonar.login=$SONAR_TOKEN
-                    """
+                withSonarQubeEnv('MySonarQubeServer') {
+                    sh '''
+                        sonar-scanner \
+                          -Dsonar.projectKey=my-java-project \
+                          -Dsonar.sources=src \
+                          -Dsonar.java.binaries=out \
+                          -Dsonar.host.url=https://your-sonarqube-server \
+                          -Dsonar.login=$SONAR_TOKEN
+                    '''
                 }
             }
         }
