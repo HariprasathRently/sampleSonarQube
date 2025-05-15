@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         // Make sure this matches the name of your SonarScanner tool in Jenkins Global Tool Config
-        sonarQubeScanner 'SonarScanner'
+        sonarQubeScanner 'Sonarqube Scanner'
     }
 
     environment {
