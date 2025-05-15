@@ -13,6 +13,9 @@ node {
 pipeline {
     agent any
 
+     tools {
+        maven 'Maven'        // Your configured Maven tool
+    }
     environment {
         SONAR_TOKEN = credentials('SONARQUBE INTERGRATION WITH JENKINS')
     }
