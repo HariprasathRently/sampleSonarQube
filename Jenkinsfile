@@ -23,12 +23,18 @@ pipeline {
                 withSonarQubeEnv('MySonarQubeServer') {
                     sh '''
                         sonar-scanner \
-                          -Dsonar.projectKey=my-java-project \
+                          -Dsonar.projectKey=JENKINS \
                           -Dsonar.sources=src \
                           -Dsonar.java.binaries=out \
-                          -Dsonar.host.url=https://your-sonarqube-server \
+                          -Dsonar.host.url=http://localhost:9000/ \
                           -Dsonar.login=$SONAR_TOKEN
                     '''
+                  def scannerHome = tool 'SonarScanner';
+    withSonarQubeEnv() {
+      sh "${scannerHome}/bin/sonar-scanner"
+    }
+  }
+
                 }
             }
         }
