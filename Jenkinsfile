@@ -1,17 +1,22 @@
-  node {
-    stage('SCM') {
-        checkout scm
-  }
-}
-
 pipeline {
     agent any
-    
+
+    tools {
+        // Make sure this matches the name of your SonarScanner tool in Jenkins Global Tool Config
+        sonarQubeScanner 'SonarScanner'
+    }
+
     environment {
-        SONAR_TOKEN = credentials('SONARQUBE INTERGRATION WITH JENKINS')
+        SONAR_TOKEN = credentials('SONARQUBE INTERGRATION WITH JENKINS') // This must be a Jenkins "Secret Text" credential
     }
 
     stages {
+        stage('Checkout Code') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Compile Java') {
             steps {
                 sh 'mkdir -p out && javac -d out $(find src -name "*.java")'
@@ -20,21 +25,16 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv('MySonarQubeServer') {
+                withSonarQubeEnv('MySonarQubeServer') { // This should match the name of your SonarQube server config in Jenkins
                     sh '''
                         sonar-scanner \
                           -Dsonar.projectKey=JENKINS \
+                          -Dsonar.projectName="JENKINS" \
                           -Dsonar.sources=src \
                           -Dsonar.java.binaries=out \
-                          -Dsonar.host.url=http://localhost:9000/ \
+                          -Dsonar.host.url=http://localhost:9000 \
                           -Dsonar.login=$SONAR_TOKEN
                     '''
-                  def scannerHome = tool 'SonarScanner';
-    withSonarQubeEnv() {
-      sh "${scannerHome}/bin/sonar-scanner"
-    }
-  }
-
                 }
             }
         }
