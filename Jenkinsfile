@@ -1,12 +1,12 @@
-pipeline {
-    agent any
-
-    node {
-  stage('SCM') {
-    checkout scm
+  node {
+    stage('SCM') {
+        checkout scm
   }
 }
 
+pipeline {
+    agent any
+    
     environment {
         SONAR_TOKEN = credentials('SONARQUBE INTERGRATION WITH JENKINS')
     }
