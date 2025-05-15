@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+    node {
+  stage('SCM') {
+    checkout scm
+  }
+}
+
     environment {
         SONAR_TOKEN = credentials('SONARQUBE INTERGRATION WITH JENKINS')
     }
@@ -35,16 +41,4 @@ pipeline {
             }
         }
     }
-}
-
-node {
-  stage('SCM') {
-    checkout scm
-  }
-  stage('SonarQube Analysis') {
-    def scannerHome = tool 'Sonarqube Scanner';
-    withSonarQubeEnv() {
-      sh "${scannerHome}/bin/sonar-scanner"
-    }
-  }
 }
