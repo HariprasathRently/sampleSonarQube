@@ -72,9 +72,9 @@
           <version>3.0.0</version>
         </plugin>
          <plugin>
-            <groupId>org.sonarsource.scanner.maven</groupId>
+            <groupId>org.codehaus.mojo</groupId>
             <artifactId>sonar-maven-plugin</artifactId>
-            <version>5.0.0.4389</version>
+            <version>3.0.2</version>
         </plugin> 
          <plugin>
             <groupId>org.jacoco</groupId>
