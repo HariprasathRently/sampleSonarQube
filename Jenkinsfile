@@ -34,7 +34,7 @@ pipeline {
                           -Dsonar.projectName="JENKINS" \
                           -Dsonar.sources=src \
                           -Dsonar.java.binaries=out \
-                          -Dsonar.host.url=http://localhost:9000 \
+                          -Dsonar.host.url="http://localhost:9000" \
                           -Dsonar.login=$SONAR_TOKEN
                     '''
                 }
