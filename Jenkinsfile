@@ -27,6 +27,8 @@ pipeline {
             steps {
                 withSonarQubeEnv('Sonarqube') { // This should match the name of your SonarQube server config in Jenkins
                     sh '''
+                    mvn clean package sonar:sonar
+                    
                         sonar-scanner \
                           -Dsonar.projectKey=JENKINS \
                           -Dsonar.projectName="JENKINS" \
