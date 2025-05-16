@@ -1,10 +1,9 @@
 pipeline {
     agent any
 
-  //   tools {
-  //        // Make sure this matches the name of your SonarScanner tool in Jenkins Global Tool Config
-  //       maven 'Maven'
-  // }
+     tools { 
+        maven '3.9.9'
+}
 
     environment {
         SONAR_TOKEN = credentials('Testing') // This must be a Jenkins "Secret Text" credential
