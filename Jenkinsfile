@@ -1,10 +1,10 @@
 pipeline {
     agent any
 
-    tools {
-         // Make sure this matches the name of your SonarScanner tool in Jenkins Global Tool Config
-        maven 'Maven'
-  }
+  //   tools {
+  //        // Make sure this matches the name of your SonarScanner tool in Jenkins Global Tool Config
+  //       maven 'Maven'
+  // }
 
     environment {
         SONAR_TOKEN = credentials('SONARQUBE') // This must be a Jenkins "Secret Text" credential
@@ -28,6 +28,14 @@ pipeline {
                 withSonarQubeEnv('Sonarqube') { // This should match the name of your SonarQube server config in Jenkins
                     sh '''
                     mvn clean package sonar:sonar
+
+                     sonar-scanner \
+                          -Dsonar.projectKey=JENKINS \
+                          -Dsonar.projectName="JENKINS" \
+                          -Dsonar.sources=src \
+                          -Dsonar.java.binaries=out \
+                          -Dsonar.host.url=http://localhost:9000 \
+                          -Dsonar.login=$SONAR_TOKEN
                     '''
                 }
             }
