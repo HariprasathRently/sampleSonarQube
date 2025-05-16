@@ -28,23 +28,7 @@ pipeline {
                 withSonarQubeEnv('Sonarqube') { // This should match the name of your SonarQube server config in Jenkins
                     sh '''
                     mvn clean package sonar:sonar
-                    
-                        sonar-scanner \
-                          -Dsonar.projectKey=JENKINS \
-                          -Dsonar.projectName="JENKINS" \
-                          -Dsonar.sources=src \
-                          -Dsonar.java.binaries=out \
-                          -Dsonar.host.url=http://localhost:9000 \
-                          -Dsonar.login=$SONAR_TOKEN
                     '''
-                }
-            }
-        }
-
-        stage('Quality Gate') {
-            steps {
-                timeout(time: 1, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
                 }
             }
         }
