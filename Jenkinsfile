@@ -25,17 +25,17 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('Sonarqube') { // This should match the name of your SonarQube server config in Jenkins
-                    // sh '''
-                    // mvn clean package sonar:sonar
+                    sh '''
+                    mvn clean package sonar:sonar
 
-                    //  sonar-scanner \
-                    //       -Dsonar.projectKey=JENKINS \
-                    //       -Dsonar.projectName="JENKINS" \
-                    //       -Dsonar.sources=src \
-                    //       -Dsonar.java.binaries=out \
-                    //       -Dsonar.host.url="http://localhost:9000" \
-                    //       -Dsonar.login=$SONAR_TOKEN
-                    // '''
+                     sonar-scanner \
+                          -Dsonar.projectKey=JENKINS \
+                          -Dsonar.projectName="JENKINS" \
+                          -Dsonar.sources=src \
+                          -Dsonar.java.binaries=out \
+                          -Dsonar.host.url="http://localhost:9000" \
+                          -Dsonar.login=$SONAR_TOKEN
+                    '''
 
                     sh 'mvn clean verify sonar:sonar'
 
