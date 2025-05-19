@@ -1,9 +1,9 @@
 pipeline {
     agent any
 
-//      tools { 
-//         maven 'Maven'
-// }
+     tools { 
+        git 'Git'
+}
 
     environment {
         SONAR_TOKEN = credentials('Testing') // This must be a Jenkins "Secret Text" credential
