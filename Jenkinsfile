@@ -6,7 +6,7 @@ pipeline {
 }
 
     environment {
-        SONAR_TOKEN = credentials('SONARQUBE INTERGRATION WITH JENKINS') // This must be a Jenkins "Secret Text" credential
+        SONAR_TOKEN = credentials('Testing') // This must be a Jenkins "Secret Text" credential
     }
 
     stages {
