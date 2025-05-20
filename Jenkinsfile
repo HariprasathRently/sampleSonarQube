@@ -6,7 +6,7 @@ pipeline {
 }
 
     environment {
-        SONAR_TOKEN = credentials('project token') // This must be a Jenkins "Secret Text" credential
+        SONAR_TOKEN = credentials('project_token') // This must be a Jenkins "Secret Text" credential
     }
 
     stages {
