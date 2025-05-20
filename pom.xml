@@ -10,7 +10,7 @@
   <version>1.0-SNAPSHOT</version>
 
   <name>JENKINS</name>
-  <url>http://www.example.com</url>
+  <url>http://localhost:8080</url>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
